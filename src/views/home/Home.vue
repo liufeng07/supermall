@@ -1,8 +1,7 @@
 <template>
   <div id="home">
-    <nav-bar class="home-nav">
-      <div slot="center">购物街</div>
-    </nav-bar>
+    <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
+    <home-swiper :banners="banners"/>
   </div>
 </template>
 
@@ -10,11 +9,13 @@
 import NavBar from "@/components/common/navbar/NavBar";
 //面向对象开发
 import {getHomeMultidata} from "@/network/home";
+import HomeSwiper from "./childComps/HomeSwiper";
 
 export default {
   name: "Home",
   components: {
     NavBar,
+    HomeSwiper
   },
   data() {
     return {
