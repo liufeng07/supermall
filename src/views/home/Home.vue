@@ -4,24 +4,31 @@
     <home-swiper :banners="banners"/>
     <recommend-view :recommends="recommends"/>
     <FeatureView/>
+    <TabControl class="tab-control" :titles="['流行', '新款', '精选']"/>
   </div>
 </template>
 
 <script>
-import NavBar from "@/components/common/navbar/NavBar";
 //面向对象开发
 import {getHomeMultidata} from "@/network/home";
 import HomeSwiper from "./childComps/HomeSwiper";
 import RecommendView from "./childComps/RecommendView";
 import FeatureView from "./childComps/FeatureView";
 
+//公共组件
+import NavBar from "@/components/common/navbar/NavBar";
+import TabControl from "@/components/content/tabControl/TabControl";
+
+
 export default {
   name: "Home",
   components: {
-    NavBar,
     HomeSwiper,
     RecommendView,
-    FeatureView
+    FeatureView,
+
+    NavBar,
+    TabControl
   },
   data() {
     return {
@@ -53,6 +60,12 @@ export default {
   right: 0px;
   top: 0px;
   z-index: 9;
+}
+
+ /*滑动固定 */
+.tab-control {
+  position: sticky;
+  top: 44px;
 }
 
 </style>
