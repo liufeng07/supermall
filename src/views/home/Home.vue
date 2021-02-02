@@ -1,16 +1,55 @@
 <template>
   <div id="home">
-    <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
+    <nav-bar class="home-nav">
+      <div slot="center">购物街</div>
+    </nav-bar>
     <home-swiper :banners="banners"/>
     <recommend-view :recommends="recommends"/>
     <FeatureView/>
     <TabControl class="tab-control" :titles="['流行', '新款', '精选']"/>
+    <ul>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+      <li>测试</li>
+    </ul>
   </div>
 </template>
 
 <script>
 //面向对象开发
-import {getHomeMultidata} from "@/network/home";
+import {getHomeMultidata, getHomeGoods} from "@/network/home";
 import HomeSwiper from "./childComps/HomeSwiper";
 import RecommendView from "./childComps/RecommendView";
 import FeatureView from "./childComps/FeatureView";
@@ -33,22 +72,48 @@ export default {
   data() {
     return {
       banners: [],
-      recommends: []
+      recommends: [],
+      goods: {
+        'pop': {page: 0, list: []},
+        'new': {page: 0, list: []},
+        'sell': {page: 0, list: []},
+      },
     }
   },
   created() {
     //1.请求多个数据
-    getHomeMultidata().then(res => {
-      // 保存到result变量中
-      this.banners = res.data.banner.list;
-      this.recommends = res.data.recommend.list;
-    })
+    this.getHomeMultidata();
+    //2.请求商品数据
+    this.getHomeGoods('pop');//请求流行数据
+    this.getHomeGoods('new');//请求新款数据
+    this.getHomeGoods('sell');//请求精选数据
+  },
+  //网络请求相关方法
+  methods: {
+    getHomeMultidata() {
+      getHomeMultidata().then(res => {
+        // 保存到result变量中
+        this.banners = res.data.banner.list;
+        this.recommends = res.data.recommend.list;
+      });
+    },
+    getHomeGoods(type) {
+      const page = this.goods[type].page + 1
+      getHomeGoods(type, page).then(res => {
+        //接口更改
+        console.log(res);
+        //push(...将集合数据遍历放入集合中)
+        this.goods[type].list.push(...res.data.list)
+        //页码增加
+        this.goods[type].page += 1
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
-#home{
+#home {
   padding-top: 44px;
 }
 
@@ -62,7 +127,7 @@ export default {
   z-index: 9;
 }
 
- /*滑动固定 */
+/*滑动固定 */
 .tab-control {
   position: sticky;
   top: 44px;
