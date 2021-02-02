@@ -7,6 +7,7 @@
     <recommend-view :recommends="recommends"/>
     <FeatureView/>
     <TabControl class="tab-control" :titles="['流行', '新款', '精选']"/>
+    <goods-list :goods="goods['pop'].list"/>
     <ul>
       <li>测试</li>
       <li>测试</li>
@@ -53,6 +54,7 @@ import {getHomeMultidata, getHomeGoods} from "@/network/home";
 import HomeSwiper from "./childComps/HomeSwiper";
 import RecommendView from "./childComps/RecommendView";
 import FeatureView from "./childComps/FeatureView";
+import GoodsList from "@/components/content/goods/GoodsList";
 
 //公共组件
 import NavBar from "@/components/common/navbar/NavBar";
@@ -65,6 +67,7 @@ export default {
     HomeSwiper,
     RecommendView,
     FeatureView,
+    GoodsList,
 
     NavBar,
     TabControl
@@ -92,6 +95,8 @@ export default {
   methods: {
     getHomeMultidata() {
       getHomeMultidata().then(res => {
+        //let result = JSON.stringify(res);
+        //console.log("getHomeMultidata:" + result);
         // 保存到result变量中
         this.banners = res.data.banner.list;
         this.recommends = res.data.recommend.list;
@@ -101,7 +106,8 @@ export default {
       const page = this.goods[type].page + 1
       getHomeGoods(type, page).then(res => {
         //接口更改
-        console.log(res);
+        //let result = JSON.stringify(res);
+        //console.log("getHomeGoods:" + result);
         //push(...将集合数据遍历放入集合中)
         this.goods[type].list.push(...res.data.list)
         //页码增加
@@ -131,6 +137,8 @@ export default {
 .tab-control {
   position: sticky;
   top: 44px;
+  /*防止商品数据覆盖tabbar 加层级*/
+  z-index: 9;
 }
 
 </style>
