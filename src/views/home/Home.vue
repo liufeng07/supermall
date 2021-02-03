@@ -8,43 +8,6 @@
     <FeatureView/>
     <TabControl class="tab-control" :titles="['流行', '新款', '精选']"/>
     <goods-list :goods="goods['pop'].list"/>
-    <ul>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-      <li>测试</li>
-    </ul>
   </div>
 </template>
 
